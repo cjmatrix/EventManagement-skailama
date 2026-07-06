@@ -2,7 +2,7 @@
 import mongoose from "mongoose"
 
 async function connectDatabase(){
-    return await mongoose.connect(process.env.MONGOURI)
+    return await mongoose.connect(process.env.MONGOURL)
 }
 
 

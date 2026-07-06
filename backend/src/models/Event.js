@@ -1,0 +1,50 @@
+
+import mongoose from "mongoose";
+
+
+const updateLogSchema = new mongoose.Schema(
+  {
+    changedBy:{
+      type:mongoose.Schema.Types.ObjectId,
+      ref:'Profile',
+      required: true,
+    },
+    previousData:{
+      type: mongoose.Schema.Types.Mixed,
+    },
+    newData:{
+      type:mongoose.Schema.Types.Mixed,
+    },
+  },
+  {timestamps:true}
+);
+
+
+const eventsSchema=new mongoose.Schema({
+    title:{
+        type:String,
+        required:[true,"Title is required"],
+        trim:true
+    },
+    profiles:[
+        {type:mongoose.Schema.Types.ObjectId,
+        ref:"Profile"
+        }
+    ],
+    startTime:{
+        type:Date,
+        required:[true,"start time is required"]
+    },
+    endTime: {
+      type: Date,
+      required: [true, 'End time is required'],
+    },
+    timezone: {
+      type: String,
+      required: [true, 'Event timezone is required'],
+    },
+    updateLogs:[updateLogSchema]
+},{timestamps:true})
+
+
+export default mongoose.model("Event",eventsSchema)
