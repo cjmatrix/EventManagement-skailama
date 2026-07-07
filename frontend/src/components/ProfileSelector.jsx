@@ -1,10 +1,13 @@
 import { useState, useRef, useEffect } from 'react';
 import  "../css/Selector.css"
-
-const ProfileSelector = ({ profiles,handleCreateProfile ,isCreating,searchQuery,setSearchQuery,selectedProfiles,setSelectedProfiles}) => {
+import { useDispatch, useSelector } from 'react-redux';
+import { setCurrentProfile } from '../store/appSlice';
+const ProfileSelector = ({ profiles,handleCreateProfile ,isCreating,searchQuery,setSearchQuery,selectedProfiles,setSelectedProfiles,isGlobal}) => {
   const [isOpen, setIsOpen] = useState(false);
+  const currentProfile=useSelector((state)=>state.app.currentProfile)
 
   const [newProfileName, setNewProfileName] = useState('');
+  const dispatch=useDispatch();
 
   const dropdownRef = useRef(null);
 
@@ -18,6 +21,17 @@ const ProfileSelector = ({ profiles,handleCreateProfile ,isCreating,searchQuery,
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
+
+  function getLabelName(){
+
+    if(!isGlobal){
+      return Object.keys(selectedProfiles).length?`${Object.keys(selectedProfiles).length } profiles selected`:"Select current profile..."
+    }
+    else{
+        return currentProfile?currentProfile.name:"Select a profile"
+    }
+
+  }
  
   return (
     <div className="selector-container" ref={dropdownRef}>
@@ -26,7 +40,7 @@ const ProfileSelector = ({ profiles,handleCreateProfile ,isCreating,searchQuery,
         className="trigger-btn"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <span>{Object.keys(selectedProfiles).length?`${Object.keys(selectedProfiles).length } profiles selected`:"Select current profile..."}</span>
+        <span>{getLabelName()}</span>
         <span className="caret">↕</span> 
       </button>
       {isOpen && (
@@ -44,12 +58,13 @@ const ProfileSelector = ({ profiles,handleCreateProfile ,isCreating,searchQuery,
           </div>
           <ul className="profile-list">
             {profiles.map((profile) => {
-              const isSelected = selectedProfiles[profile._id];
+              const isSelected = !isGlobal?selectedProfiles[profile._id]:currentProfile?currentProfile._id===profile._id:false;
               return (
                 <li 
                   key={profile._id}
                   onClick={() => {
-                    if(selectedProfiles[profile._id]){
+                    if(!isGlobal){
+                       if(selectedProfiles[profile._id]){
                       setSelectedProfiles((prev)=>{
                       const {[profile._id]:_, ...rest}=prev
                       return rest
@@ -59,6 +74,12 @@ const ProfileSelector = ({ profiles,handleCreateProfile ,isCreating,searchQuery,
                     else{
                       setSelectedProfiles((prev)=>({...prev,[profile._id]:profile}))
                     }
+                    }
+                    else{
+                      dispatch(setCurrentProfile(profile))
+                      setIsOpen(false)
+                    }
+                   
                  
                   }}
                   className={`profile-item ${isSelected ? 'selected' : ''}`}

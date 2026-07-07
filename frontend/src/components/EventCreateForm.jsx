@@ -8,6 +8,7 @@ import { TIMEZONES } from "../constants/timezones";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import DateSelector from "./DateSelector";
+import useCreateEvent from "../hooks/useCreateEvent";
 dayjs.extend(utc);
 
 export default function EventCreateForm() {
@@ -28,6 +29,8 @@ export default function EventCreateForm() {
 
   const addProfileMutation = useAddProfile();
 
+  const createEventMuation=useCreateEvent();
+
   const handleCreateProfile = (name) => {
     addProfileMutation.mutate(name);
   };
@@ -36,7 +39,7 @@ export default function EventCreateForm() {
     e.preventDefault();
     setFormError("");
 
-    if (!startDate || !startTime || !endDate || !endTime) {
+    if (!startDate || !startTime || !endDate || !endTime ||Object.keys(selectedProfiles).length===0) {
       setFormError("Please fill out all date and time fields.");
       return;
     }
@@ -56,6 +59,9 @@ export default function EventCreateForm() {
       endTime: endDayjs.utc().format(),
     };
 
+    createEventMuation.mutate(payload);
+    setSelectedProfiles({})
+
     console.log(payload)
   };
 
@@ -72,6 +78,7 @@ export default function EventCreateForm() {
           selectedProfiles={selectedProfiles}
           setSelectedProfiles={setSelectedProfiles}
           setSearchQuery={setSearchQuery}
+          isGlobal={false}
         ></ProfileSelector>
       </div>
       <div>
