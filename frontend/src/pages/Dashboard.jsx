@@ -1,14 +1,20 @@
+import { useState } from "react";
 import ProfileSelector from "../components/ProfileSelector.jsx";
 import { useAddProfile } from "../hooks/useAddProfile.js";
 import { useGetProfile } from "../hooks/useGetProfile.js";
+import { useEffect } from "react";
+import useCustomDebounceHook from "../hooks/useCustomDebounceHook.js";
+import EventCreateForm from "../components/EventCreateForm.jsx";
 
 export default function Dashboard() {
-  const { data: profiles } = useGetProfile();
-  const addProfileMutation = useAddProfile();
 
-  const handleCreateProfile = (name) => {
-    addProfileMutation.mutate(name);
-  };
+
+
+
+
+
+
+ 
 
   return (
     <div className="container">
@@ -20,14 +26,7 @@ export default function Dashboard() {
       </div>
       <div className="event-container">
         <div className="create-event">
-          <form>
-            <label style={{ color: "black", display: "block" }}>Profiles</label>
-            <ProfileSelector
-              profiles={profiles}
-              onCreateProfile={handleCreateProfile}
-              isCreating={addProfileMutation.isPending}
-            ></ProfileSelector>
-          </form>
+          <EventCreateForm></EventCreateForm>
         </div>
         <div className="events"></div>
       </div>

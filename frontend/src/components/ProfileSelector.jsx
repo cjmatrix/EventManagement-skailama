@@ -1,11 +1,11 @@
 import { useState, useRef, useEffect } from 'react';
-import "../css/ProfileSelector.css"
+import  "../css/Selector.css"
 
-const ProfileSelector = ({ profiles,currentProfile,onCreateProfile ,isCreating}) => {
+const ProfileSelector = ({ profiles,handleCreateProfile ,isCreating,searchQuery,setSearchQuery,selectedProfiles,setSelectedProfiles}) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
+
   const [newProfileName, setNewProfileName] = useState('');
-console.log(profiles)
+
   const dropdownRef = useRef(null);
 
   useEffect(() => {
@@ -14,11 +14,11 @@ console.log(profiles)
         setIsOpen(false);
       }
     };
-
+  
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
-
+ 
   return (
     <div className="selector-container" ref={dropdownRef}>
       <button 
@@ -26,7 +26,7 @@ console.log(profiles)
         className="trigger-btn"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <span>{"Select current profile..."}</span>
+        <span>{Object.keys(selectedProfiles).length?`${Object.keys(selectedProfiles).length } profiles selected`:"Select current profile..."}</span>
         <span className="caret">↕</span> 
       </button>
       {isOpen && (
@@ -43,14 +43,23 @@ console.log(profiles)
             />
           </div>
           <ul className="profile-list">
-            {profiles.filter(p => p.name.toLowerCase().includes(searchQuery.toLowerCase())).map((profile) => {
-              const isSelected = currentProfile?._id === profile._id;
+            {profiles.map((profile) => {
+              const isSelected = selectedProfiles[profile._id];
               return (
                 <li 
                   key={profile._id}
                   onClick={() => {
-                    // onSelectProfile(profile);
-                    setIsOpen(false);
+                    if(selectedProfiles[profile._id]){
+                      setSelectedProfiles((prev)=>{
+                      const {[profile._id]:_, ...rest}=prev
+                      return rest
+                      })
+                      
+                    }
+                    else{
+                      setSelectedProfiles((prev)=>({...prev,[profile._id]:profile}))
+                    }
+                 
                   }}
                   className={`profile-item ${isSelected ? 'selected' : ''}`}
                 >
@@ -73,7 +82,7 @@ console.log(profiles)
               disabled={isCreating}
               onClick={() => {
                 if (newProfileName.trim()) {
-                  onCreateProfile({name:newProfileName});
+                  handleCreateProfile({name:newProfileName});
                   setNewProfileName('');
                 }
               }}

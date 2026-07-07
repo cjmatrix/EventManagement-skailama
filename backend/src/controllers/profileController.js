@@ -7,6 +7,7 @@ import { success } from "zod";
 export const createProfile= async (req,res)=>{
 
     const {name}=req.body
+   
 
     const result= await profileServices.create(name);
     
@@ -15,8 +16,9 @@ export const createProfile= async (req,res)=>{
 }
 
 export const getProfile=async (req,res)=>{
-
-    const result=await profileServices.getProfile();
+     const queryText=req.query.q ||"";
+     
+    const result=await profileServices.getProfile(queryText);
 
     res.status(200).json({success:true,data:result,message:"profile fetched"});
 

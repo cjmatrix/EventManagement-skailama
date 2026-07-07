@@ -1,20 +1,25 @@
+import Profile from '../models/Profile.js';
 
-import Profile from "../models/Profile.js";
+const create = async (name) => {
+  const profile = await Profile.create({ name });
 
+  return profile;
+};
 
-const create=async(name)=>{
+const getProfile = async (queryText) => {
+   
+  if (!queryText || queryText.trim() === '') {
+   
+    return await Profile.find({});
+  }
 
-    const profile =await Profile.create({name});
+  const escapedQuery = queryText.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
 
-    return profile
-}
+  const searchRegex = new RegExp(escapedQuery, 'i');
+  
+  return await Profile.find({
+    name: { $regex: searchRegex },
+  });
+};
 
-
-const getProfile=async ()=>{
-    const profiles=await Profile.find();
-
-    return profiles
-}
-
-
-export default {create, getProfile}
+export default { create, getProfile };

@@ -1,0 +1,57 @@
+.datetime-container {
+  margin-bottom: 16px;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.datetime-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: #334155;
+  margin-bottom: 8px;
+}
+
+.datetime-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.date-section{
+width: 80%;
+}
+
+.input-section {
+  display: flex;
+  align-items: center;
+  background-color: #f8fafc; 
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 8px 12px;
+ 
+  transition: border-color 0.2s ease;
+}
+
+.input-section:focus-within {
+  border-color: #8b5cf6; 
+  background-color: #ffffff;
+}
+
+.input-icon {
+    
+    color: #94a3b8;
+    margin-right: 8px;
+    }
+
+.common-input {
+  border: none;
+  background: transparent;
+  outline: none;
+  width: 100%;
+  color: #334155;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+
+
