@@ -9,6 +9,7 @@ import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import DateSelector from "./DateSelector";
 import useCreateEvent from "../hooks/useCreateEvent";
+import useUpdateEvent from "../hooks/useUpdateEVent";
 dayjs.extend(utc);
 
 export default function EventCreateForm({initialData,onClose}) {
@@ -21,10 +22,13 @@ export default function EventCreateForm({initialData,onClose}) {
     if (isEditMode && initialData.profiles) {
        
     initialData.profiles.forEach(p => defaultProfiles[p._id] = p);
-    console.log(defaultProfiles,"HEreeeeeeeeee")
+   
     
   }
 
+  const  updateEventMutation=useUpdateEvent()
+
+  
 
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -104,9 +108,10 @@ export default function EventCreateForm({initialData,onClose}) {
 
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} style={{display:"flex",flexDirection:"column",gap:"1rem",width:"100%"}}>
+        <h2 style={{marginTop:"-4rem"}}>Create Event</h2>
       <div>
-        <label style={{ color: "black", display: "block" }}>Profiles</label>
+        <label style={{ color: "black", display: "block" ,fontWeight:"bold"}}>Profiles</label>
         <ProfileSelector
           profiles={profiles}
           handleCreateProfile={handleCreateProfile}
@@ -119,14 +124,14 @@ export default function EventCreateForm({initialData,onClose}) {
         ></ProfileSelector>
       </div>
       <div>
-        <label style={{ color: "black", display: "block" }}>Profiles</label>
+          <label style={{ color: "black", display: "block" ,fontWeight:"bold"}}>Timezone</label>
         <TimezoneSelector
           selectTimezone={selectTimezone}
           setSelectTimezone={setSelectTimezone}
         ></TimezoneSelector>
       </div>
       <div>
-        <label style={{ color: "black", display: "block" }}>Profiles</label>
+          <label style={{ color: "black", display: "block" ,fontWeight:"bold"}}>Start date & Time</label>
         <DateSelector
           selectDate={startDate}
           setSelectDate={setStartDate}
@@ -135,7 +140,7 @@ export default function EventCreateForm({initialData,onClose}) {
         ></DateSelector>
       </div>
       <div>
-        <label style={{ color: "black", display: "block" }}>Profiles</label>
+          <label style={{ color: "black", display: "block" ,fontWeight:"bold"}}>End date & Time</label>
         <DateSelector
           selectDate={endDate}
           setSelectDate={setEndDate}

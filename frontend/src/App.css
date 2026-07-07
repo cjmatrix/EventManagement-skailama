@@ -28,16 +28,23 @@
 }
 
 .create-event{
-  height: 40vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
   width: 40vw;
   background-color:white;
   z-index: 1000;
 }
 
 .events{
-  height: 40vh;
+   display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
   width: 40vw;
   background-color:white;
+  z-index: 1000;
 }
 
 

@@ -23,7 +23,7 @@ export default function TimezoneSelector({selectTimezone,setSelectTimezone}){
     })
  
     return(
-        <div className="selector-container" ref={dropdownRef}>
+        <div className="selector-container"  ref={dropdownRef}>
     
       <button 
         type="button"
@@ -37,7 +37,7 @@ export default function TimezoneSelector({selectTimezone,setSelectTimezone}){
       {isOpen && (
         <div className="dropdown-menu">
     
-          <div className="search-section">
+          <div className="search-section" style={{display:"flex", gap:"1rem"}}>
             <span className="search-icon">🔍</span>
             <input 
               type="text" 

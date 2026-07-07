@@ -4,11 +4,6 @@ import mongoose from "mongoose";
 
 const updateLogSchema = new mongoose.Schema(
   {
-    changedBy:{
-      type:mongoose.Schema.Types.ObjectId,
-      ref:'Profile',
-      required: true,
-    },
     previousData:{
       type: mongoose.Schema.Types.Mixed,
     },

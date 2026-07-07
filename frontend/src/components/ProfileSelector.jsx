@@ -34,7 +34,7 @@ const ProfileSelector = ({ profiles,handleCreateProfile ,isCreating,searchQuery,
   }
  
   return (
-    <div className="selector-container" ref={dropdownRef}>
+    <div className="selector-container" style={{zIndex:"1000000"}} ref={dropdownRef}>
       <button 
         type='button'
         className="trigger-btn"
@@ -77,7 +77,7 @@ const ProfileSelector = ({ profiles,handleCreateProfile ,isCreating,searchQuery,
                     }
                     else{
                       dispatch(setCurrentProfile(profile))
-                      
+
                       setIsOpen(false)
                     }
                    

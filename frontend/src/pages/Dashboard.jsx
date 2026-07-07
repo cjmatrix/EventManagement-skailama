@@ -25,8 +25,15 @@ export default function Dashboard() {
 
 
   return (
-    <div className="container">
-      <div style={{ display: "flex" }}>
+    <div className="container" style={{paddingTop:"2rem"}}>
+      <div style={{ display: "flex" ,justifyContent:"center",alignItems:"center "}}>
+        
+        <div style={{width:"67vw"}}>
+          <h1>Event Management</h1>
+          <p className="mini-title">
+            create and manage events across multiple users
+          </p>
+        </div>
         <div>
           <ProfileSelector
             profiles={profiles}
@@ -38,16 +45,10 @@ export default function Dashboard() {
             isGlobal={true}
           ></ProfileSelector>
         </div>
-        <div>
-          <h1>Event Management</h1>
-          <p className="mini-title">
-            create and manage events across multiple users
-          </p>
-        </div>
       </div>
 
       <div className="event-container">
-        <div className="create-event">
+        <div className="create-event" style={{padding:"1.5rem"}}>
           <EventCreateForm></EventCreateForm>
         </div>
         <div className="events" style={{overflow:"scroll"}}>

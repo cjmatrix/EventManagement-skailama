@@ -1,7 +1,7 @@
 
 
 
-import { success } from "zod";
+
 import eventServices from "../services/eventServices.js";
 import AppError from "../utils/errorHandler.js";
 
@@ -28,4 +28,20 @@ export const getEventDetail=async(req,res)=>{
 
     res.status(200).json({success:true,data:result,message:"Evenet fetched"});
 
+}
+
+
+export const updateEventDetail=async(req,res)=>{
+
+    
+    const updateData=req.body
+
+    const id=req.params.id
+    if(!id){
+        throw new AppError("Eventid is not found")
+    }
+
+    const result=await eventServices.updateEvent(id,updateData)
+
+    res.status(200).json({success:true,data:result,message:"Event successfully updated"})
 }
