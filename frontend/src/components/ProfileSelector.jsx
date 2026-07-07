@@ -77,6 +77,7 @@ const ProfileSelector = ({ profiles,handleCreateProfile ,isCreating,searchQuery,
                     }
                     else{
                       dispatch(setCurrentProfile(profile))
+                      
                       setIsOpen(false)
                     }
                    

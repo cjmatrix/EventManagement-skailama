@@ -1,0 +1,10 @@
+.eventlist-btn{
+  background-color:rgb(223, 223, 223);
+  color: rgb(44, 44, 44);
+  border: none;
+  width: 40%;
+  border-radius: 4px;
+  padding: 6px 16px;
+  cursor: pointer;
+  font-weight: 500;
+}

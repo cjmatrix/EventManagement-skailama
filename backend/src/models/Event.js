@@ -21,11 +21,6 @@ const updateLogSchema = new mongoose.Schema(
 
 
 const eventsSchema=new mongoose.Schema({
-    title:{
-        type:String,
-        required:[true,"Title is required"],
-        trim:true
-    },
     profiles:[
         {type:mongoose.Schema.Types.ObjectId,
         ref:"Profile"

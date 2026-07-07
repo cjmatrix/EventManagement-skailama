@@ -1,5 +1,7 @@
-export const eventSchema = z
-  .object({
+import z from "zod";
+
+export const eventSchema = z.object({
+  payload:z.object({
     profiles: z
       .array(z.string(), { required_error: 'Profile array is required' })
       .min(1, 'At least one profile must be selected'),
@@ -16,4 +18,6 @@ export const eventSchema = z
   .refine((data) => new Date(data.startTime) < new Date(data.endTime), {
     message: 'End time cannot be before or equal to start time',
     path: ['endTime'],
-  });
+  })
+})
+  

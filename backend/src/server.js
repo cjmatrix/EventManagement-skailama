@@ -3,6 +3,7 @@ import express from "express";
 import connectDatabase from "./config/db.js";
 
 import profileRoutes from "./routes/profileRoutes.js"
+import eventRoutes from "./routes/eventRoutes.js"
 import cors from "cors"
 
 const app = express();
@@ -12,6 +13,8 @@ app.use(cors())
 app.use(express.json())
 
 app.use("/api/v1/profiles",profileRoutes)
+app.use("/api/v1/events",eventRoutes)
+
 
 
 

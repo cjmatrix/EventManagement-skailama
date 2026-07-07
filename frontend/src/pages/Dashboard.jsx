@@ -5,13 +5,16 @@ import { useGetProfile } from "../hooks/useGetProfile.js";
 import { useEffect } from "react";
 import useCustomDebounceHook from "../hooks/useCustomDebounceHook.js";
 import EventCreateForm from "../components/EventCreateForm.jsx";
+import { useGetEventDetail } from "../hooks/useGetEventDetail.js";
+import { useSelector } from "react-redux";
+import EventList from "../components/Eventlist.jsx";
 
 export default function Dashboard() {
    const [searchQuery, setSearchQuery] = useState("");
    const { finalInput } = useCustomDebounceHook(searchQuery);
   const { data: profiles = [] } = useGetProfile(finalInput ? finalInput : "");
- 
- 
+
+
    const addProfileMutation = useAddProfile();
   
   
@@ -30,8 +33,7 @@ export default function Dashboard() {
             handleCreateProfile={handleCreateProfile}
             isCreating={addProfileMutation.isPending}
             searchQuery={searchQuery}
-            // selectedProfiles={selectedProfiles}
-            // setSelectedProfiles={setSelectedProfiles}
+            
             setSearchQuery={setSearchQuery}
             isGlobal={true}
           ></ProfileSelector>
@@ -48,7 +50,9 @@ export default function Dashboard() {
         <div className="create-event">
           <EventCreateForm></EventCreateForm>
         </div>
-        <div className="events"></div>
+        <div className="events" style={{overflow:"scroll"}}>
+            <EventList ></EventList>
+        </div>
       </div>
     </div>
   );

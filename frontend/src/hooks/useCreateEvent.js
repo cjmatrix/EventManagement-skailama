@@ -10,7 +10,7 @@ export default function useCreateEvent(){
             return response.data.data
         },
         onSuccess:()=>{
-            // queryClient.invalidateQueries(["events"])
+            queryClient.invalidateQueries(["events"])
         }
         
     })

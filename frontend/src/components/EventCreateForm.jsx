@@ -11,25 +11,46 @@ import DateSelector from "./DateSelector";
 import useCreateEvent from "../hooks/useCreateEvent";
 dayjs.extend(utc);
 
-export default function EventCreateForm() {
+export default function EventCreateForm({initialData,onClose}) {
+
+    const isEditMode = !!initialData;
+
+    console.log(isEditMode)
+     console.log(initialData)
+    const defaultProfiles = {};
+    if (isEditMode && initialData.profiles) {
+       
+    initialData.profiles.forEach(p => defaultProfiles[p._id] = p);
+    console.log(defaultProfiles,"HEreeeeeeeeee")
+    
+  }
+
+
   const [searchQuery, setSearchQuery] = useState("");
 
   const { finalInput } = useCustomDebounceHook(searchQuery);
   const { data: profiles = [] } = useGetProfile(finalInput ? finalInput : "");
-  const [selectedProfiles, setSelectedProfiles] = useState({});
-  const [selectTimezone, setSelectTimezone] = useState(TIMEZONES[0]);
+  const [selectedProfiles, setSelectedProfiles] = useState(defaultProfiles);
+  const defaultTz = isEditMode 
+    ? TIMEZONES.find(t => t.value === initialData.timezone) || TIMEZONES[0]
+    : TIMEZONES[0];
+  const [selectTimezone, setSelectTimezone] = useState(defaultTz);
+  const defaultStartDate = isEditMode ? dayjs(initialData.startTime).tz(initialData.timezone).format("YYYY-MM-DD") : "";
+  const defaultStartTime = isEditMode ? dayjs(initialData.startTime).tz(initialData.timezone).format("HH:mm") : "";
+  
+  const defaultEndDate = isEditMode ? dayjs(initialData.endTime).tz(initialData.timezone).format("YYYY-MM-DD") : "";
+  const defaultEndTime = isEditMode ? dayjs(initialData.endTime).tz(initialData.timezone).format("HH:mm") : "";
 
-  const [startDate, setStartDate] = useState("");
-  const [startTime, setStartTime] = useState("");
-
-  const [endDate, setEndDate] = useState("");
-  const [endTime, setEndTime] = useState("");
+  const [startDate, setStartDate] = useState(defaultStartDate);
+  const [startTime, setStartTime] = useState(defaultStartTime);
+  const [endDate, setEndDate] = useState(defaultEndDate);
+  const [endTime, setEndTime] = useState(defaultEndTime);
 
   const [formError, setFormError] = useState("");
 
   const addProfileMutation = useAddProfile();
 
-  const createEventMuation=useCreateEvent();
+  const createEventMutation=useCreateEvent();
 
   const handleCreateProfile = (name) => {
     addProfileMutation.mutate(name);
@@ -59,13 +80,29 @@ export default function EventCreateForm() {
       endTime: endDayjs.utc().format(),
     };
 
-    createEventMuation.mutate(payload);
-    setSelectedProfiles({})
+    if (isEditMode) {
+      updateEventMutation.mutate({ id: initialData._id, data: payload }, {
+        onSuccess: () => {
+          if (onClose) onClose(); 
+        }
+      });
+    } else {
+      createEventMutation.mutate(payload, {
+        onSuccess: () => {
+         
+          setSelectedProfiles({});
+          setStartDate("");
+          setStartTime("");
+          setEndDate("");
+          setEndTime("");
+        }
+      });
+    }
 
-    console.log(payload)
+   
   };
 
-  console.log(startDate, startTime, endDate, endTime);
+
   return (
     <form onSubmit={handleSubmit}>
       <div>
@@ -126,7 +163,7 @@ export default function EventCreateForm() {
           width: "100%",
         }}
       >
-        + Create Event
+        {isEditMode ? "Save Changes" : "+ Create Event"}
       </button>
     </form>
   );

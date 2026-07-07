@@ -5,7 +5,7 @@ export default function TimezoneSelector({selectTimezone,setSelectTimezone}){
     const [isOpen,setIsOpen]=useState(false)
     const dropdownRef=useRef()
     const [searchQuery, setSearchQuery] = useState('')
-    console.log(selectTimezone)
+ 
     useEffect(()=>{
         const handleClickOutside=(event)=>{
             if(dropdownRef.current&& !dropdownRef.current.contains(event.target)){
@@ -21,7 +21,7 @@ export default function TimezoneSelector({selectTimezone,setSelectTimezone}){
     const filteredTimezones=TIMEZONES.filter((t)=>{
         return t.label.toLowerCase().includes(searchQuery.toLowerCase())
     })
-    console.log(filteredTimezones)
+ 
     return(
         <div className="selector-container" ref={dropdownRef}>
     
