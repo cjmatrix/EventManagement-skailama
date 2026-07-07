@@ -10,7 +10,10 @@ import EventCreateForm from "./EventCreateForm";
 import Modal from "./Modal";
 import "../css/Eventlist.css";
 import LogViewModal from "./LogViewModal";
-
+import { Edit } from "lucide-react";
+import { Logs } from "lucide-react";
+import { User } from "lucide-react";
+import { Calendar } from "lucide-react";
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
@@ -35,6 +38,8 @@ export default function EventList() {
         flexDirection: "column",
         gap: "2rem",
         width: "90%",
+        height: "100%",
+        marginTop: "3rem",
       }}
     >
       <div>
@@ -91,17 +96,36 @@ export default function EventList() {
                   }}
                 >
                   <div>
+                    <span
+                     
+                    >
+                      <User  style={{
+                        marginRight: "0.5rem",
+                        width: "1rem",
+                        height: "1rem",
+                      }}></User>
+                    </span>
                     {event.profiles.map((p) => {
                       return <span>{p.name + ", "}</span>;
                     })}
                   </div>
 
-                  <div style={{ marginTop: "1rem" }}>
+                  <div style={{ marginTop: "1rem", display:"flex", flexDirection:"column",gap:"0.5rem"}}>
                     <p>
+                        <span  ><Calendar style={{
+                        marginRight: "0.5rem",
+                        width: "1rem",
+                        height: "1rem",
+                      }} ></Calendar></span>
                       <strong>Start:</strong> {formattedStart}
                     </p>
                     <p>{formattedStartTime}</p>
                     <p>
+                         <span  ><Calendar style={{
+                        marginRight: "0.5rem",
+                        width: "1rem",
+                        height: "1rem",
+                      }} ></Calendar></span>
                       <strong>End:</strong> {formattedEnd}
                     </p>
                     <p>{formattedEndtTime}</p>
@@ -134,20 +158,48 @@ export default function EventList() {
                   >
                     <button
                       className="eventlist-btn"
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
                       onClick={() => {
                         setInitialData(event);
                         setModalOpen(true);
                       }}
                     >
+                      <span>
+                        <Edit
+                          style={{
+                            width: "1rem",
+                            height: "1rem",
+                            marginRight: "1rem",
+                          }}
+                        ></Edit>
+                      </span>
                       Edit
                     </button>
                     <button
                       className="eventlist-btn"
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
                       onClick={() => {
                         setInitialData(event);
                         setLogModalOpen(true);
                       }}
                     >
+                      <span>
+                        <Logs
+                          style={{
+                            width: "1rem",
+                            height: "1rem",
+                            marginRight: "1rem",
+                          }}
+                        ></Logs>
+                      </span>
                       View Logs
                     </button>
                   </div>

@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import  "../css/Selector.css"
 import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentProfile } from '../store/appSlice';
+
 const ProfileSelector = ({ profiles,handleCreateProfile ,isCreating,searchQuery,setSearchQuery,selectedProfiles,setSelectedProfiles,isGlobal}) => {
   const [isOpen, setIsOpen] = useState(false);
   const currentProfile=useSelector((state)=>state.app.currentProfile)
