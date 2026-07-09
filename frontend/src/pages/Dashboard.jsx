@@ -25,8 +25,8 @@ export default function Dashboard() {
 
 
   return (
-    <div className="container" style={{paddingTop:"2rem"}}>
-      <div style={{ display: "flex" ,justifyContent:"center",alignItems:"center "}}>
+    <div className="container" > 
+      <div className="navbar-container">
         
         <div style={{width:"67vw"}}>
           <h1>Event Management</h1>
@@ -48,7 +48,7 @@ export default function Dashboard() {
       </div>
 
       <div className="event-container">
-        <div className="create-event" style={{padding:"1.5rem"}}>
+        <div className="create-event">
           <EventCreateForm></EventCreateForm>
         </div>
         <div className="events" style={{overflow:"scroll"}}>

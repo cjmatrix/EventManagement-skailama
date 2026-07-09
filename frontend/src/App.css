@@ -11,6 +11,8 @@
   background-color: rgb(233, 233, 233);
   width: 100vw;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .mini-title{
@@ -19,9 +21,10 @@
 
 .event-container{
    color: rgb(107, 107, 107);
-  height: 80vh;
+  height: 100vh;
   width: 100vw;
   display: flex;
+  
   align-items: center;
   justify-content: center;
   gap: 2rem;
@@ -35,9 +38,12 @@
   width: 40vw;
   background-color:white;
   z-index: 1000;
+  padding: 1.5rem;
+  border-radius: 1rem;
 }
 
 .events{
+  border-radius: 1rem;
    display: flex;
   justify-content: center;
   align-items: center;
@@ -46,6 +52,33 @@
   background-color:white;
   z-index: 1000;
 }
+
+.navbar-container{
+  padding-top: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 768px){
+  .event-container{
+    flex-direction: column;
+    margin-top: 2rem;
+  }
+
+  .create-event, .events{
+    width: 100vw;
+    height: 100vh;
+   
+  }
+
+  .navbar-container{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+}
+
 
 
 

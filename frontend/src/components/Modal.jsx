@@ -1,5 +1,5 @@
-import React from 'react';
 
+import {createPortal} from "react-dom"
 export default function Modal({ isOpen, onClose, children }) {
   if (!isOpen) return null; 
 
@@ -29,7 +29,7 @@ export default function Modal({ isOpen, onClose, children }) {
      boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1)", 
    };
 
-  return (
+  return createPortal(
     <div 
       style={outerStyle} 
       onClick={onClose} 
@@ -40,6 +40,6 @@ export default function Modal({ isOpen, onClose, children }) {
       >
         {children}
       </div>
-    </div>
+    </div>,document.body
   );
 }

@@ -38,7 +38,7 @@ export default function EventList() {
         flexDirection: "column",
         gap: "2rem",
         width: "90%",
-        height: "100%",
+        height: "90%",
         marginTop: "3rem",
       }}
     >
@@ -49,6 +49,7 @@ export default function EventList() {
         <TimezoneSelector
           selectTimezone={selectTimezone}
           setSelectTimezone={setSelectTimezone}
+          
         ></TimezoneSelector>
       </div>
       <div>

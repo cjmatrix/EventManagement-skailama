@@ -2,9 +2,10 @@
 
 
 
+import { EVENT_MESSAGES, PROFILE_MESSAGES } from "../contsants/messages.js";
 import eventServices from "../services/eventServices.js";
 import AppError from "../utils/errorHandler.js";
-
+import {StatusCodes} from "http-status-codes"
 
 export const createEvent=async(req,res)=>{
 
@@ -12,7 +13,7 @@ export const createEvent=async(req,res)=>{
 
     const result=await eventServices.createEvent(payload);
 
-    res.status(201).json({success:true,data:result,message:"Event created successfully"})
+    res.status(StatusCodes.CREATED).json({success:true,data:result,message:EVENT_MESSAGES.CREATED})
 }
 
 
@@ -21,12 +22,12 @@ export const getEventDetail=async(req,res)=>{
     const id=req.params.id
 
     if(!id){
-        throw new AppError("Profile id is missing",400)
+        throw new AppError(PROFILE_MESSAGES.ID_MISSING,StatusCodes.BAD_REQUEST)
     }
 
     const result=await eventServices.getEvent(id)
 
-    res.status(200).json({success:true,data:result,message:"Evenet fetched"});
+    res.status(StatusCodes.OK).json({success:true,data:result,message:EVENT_MESSAGES.FETCHED});
 
 }
 
@@ -38,10 +39,10 @@ export const updateEventDetail=async(req,res)=>{
 
     const id=req.params.id
     if(!id){
-        throw new AppError("Eventid is not found")
+        throw new AppError(EVENT_MESSAGES.NOT_FOUND,StatusCodes.BAD_REQUEST)
     }
 
     const result=await eventServices.updateEvent(id,updateData)
 
-    res.status(200).json({success:true,data:result,message:"Event successfully updated"})
+    res.status(StatusCodes.OK).json({success:true,data:result,message:EVENT_MESSAGES.UPDATED})
 }

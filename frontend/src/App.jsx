@@ -1,14 +1,24 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
+
 import './App.css'
 import Dashboard from './pages/Dashboard'
+import {Toaster} from "react-hot-toast"
 function App() {
-  const [count, setCount] = useState(0)
+
 
   return (
     <>
+    <Toaster 
+        position="bottom-right" 
+        toastOptions={{
+          duration: 3000,
+          style: {
+            background: 'white',
+            color: 'black',
+            border:"1px solid purple"
+          },
+        }} 
+      />
      <Dashboard>
      </Dashboard>
     </>

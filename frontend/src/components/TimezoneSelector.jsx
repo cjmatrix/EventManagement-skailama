@@ -59,7 +59,7 @@ export default function TimezoneSelector({selectTimezone,setSelectTimezone}){
                     key={tz.value}
                     onClick={() => {
                       setSelectTimezone(tz); 
-                    
+                      setIsOpen(false)
                       setSearchQuery(''); 
                     }}
                     className={`profile-item ${isSelected ? 'selected' : ''}`}

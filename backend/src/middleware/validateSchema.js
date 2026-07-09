@@ -15,9 +15,11 @@ const validateSchema = (schema) => {
         const errorMsg = error.errors
           .map((err) => `${err.path.join('.')}: ${err.message}`)
           .join(', ');
+
+          return next(new AppError(`Validation Error - ${errorMsg}`, 400));
       }
 
-      return next(new AppError(`Validation Error - ${errorMsg}`, 400));
+      return next(new AppError("Internal Server Error during validation", 500));
    
     }
   };

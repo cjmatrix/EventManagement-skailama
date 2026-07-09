@@ -15,6 +15,8 @@ const updateLogSchema = new mongoose.Schema(
 );
 
 
+
+
 const eventsSchema=new mongoose.Schema({
     profiles:[
         {type:mongoose.Schema.Types.ObjectId,
@@ -35,6 +37,8 @@ const eventsSchema=new mongoose.Schema({
     },
     updateLogs:[updateLogSchema]
 },{timestamps:true})
+
+eventsSchema.index({ profiles:1});
 
 
 export default mongoose.model("Event",eventsSchema)

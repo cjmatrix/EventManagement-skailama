@@ -7,6 +7,7 @@ const ProfileSelector = ({ profiles,handleCreateProfile ,isCreating,searchQuery,
   const [isOpen, setIsOpen] = useState(false);
   const currentProfile=useSelector((state)=>state.app.currentProfile)
 
+  const [addProfileTrigger,setAddProfileTrigger]=useState(false)
   const [newProfileName, setNewProfileName] = useState('');
   const dispatch=useDispatch();
 
@@ -16,6 +17,7 @@ const ProfileSelector = ({ profiles,handleCreateProfile ,isCreating,searchQuery,
     const handleClickOutside = (event) => { 
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setIsOpen(false);
+        setAddProfileTrigger(false)
       }
     };
   
@@ -35,7 +37,7 @@ const ProfileSelector = ({ profiles,handleCreateProfile ,isCreating,searchQuery,
   }
  
   return (
-    <div className="selector-container" style={{zIndex:"1000000"}} ref={dropdownRef}>
+    <div className="selector-container" style={{zIndex:"8000"}} ref={dropdownRef}>
       <button 
         type='button'
         className="trigger-btn"
@@ -91,8 +93,9 @@ const ProfileSelector = ({ profiles,handleCreateProfile ,isCreating,searchQuery,
                 </li>
               );
             })}
-          </ul>
-          <div className="add-section">
+          </ul>{
+            addProfileTrigger?
+             <div className="add-section">
             <input 
               type="text" 
               className="add-input"
@@ -112,7 +115,24 @@ const ProfileSelector = ({ profiles,handleCreateProfile ,isCreating,searchQuery,
             >
               Add
             </button>
-          </div>
+          </div>:
+
+            <div style={{display:"flex" ,justifyContent:"center",alignItems:"center"}} >
+              <span style={{fontSize:"1.5rem" ,marginLeft:"1rem",}}>+</span>
+               <button 
+            type='button'
+              style={{color:"black" ,outline:"none",border:"none",background:"transparent ", padding:"1rem 1rem"}}
+              disabled={isCreating}
+              onClick={() => {
+                setAddProfileTrigger(true)
+              }}
+            >
+             Add Profile
+            </button>
+            </div>
+
+          }
+         
 
         </div>
       )}

@@ -14,13 +14,8 @@
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
+    "http-status-codes": "^2.3.0",
     "mongoose": "^9.7.3",
     "zod": "^4.4.3"
-  },
-  "devDependencies": {
-    "eslint": "^10.6.0",
-    "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-prettier": "^5.5.6",
-    "prettier": "^3.9.4"
   }
 }

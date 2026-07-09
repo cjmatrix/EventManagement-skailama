@@ -13,15 +13,17 @@ export default function LogViewModal({ event, onClose }) {
     if (!newData) return "Event updated";
 
     if (newData.profiles) {
-      const names = newData.profiles.map(p => p.name || 'Unknown User').join(', ');
+      const names = newData.profiles.map(p => p.name ||" ").join(', ');
       return `Profiles changed to: ${names}`;
+    }
+
+     if (newData.timezone) {
+      return `Timezone changed to: ${newData.timezone}`;
     }
     if (newData.startTime || newData.endTime) {
       return "Start date/time updated";
     }
-    if (newData.timezone) {
-      return `Timezone changed to: ${newData.timezone}`;
-    }
+   
     
     return "Event details updated";
   };
