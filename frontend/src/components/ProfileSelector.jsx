@@ -101,6 +101,7 @@ const ProfileSelector = ({ profiles,handleCreateProfile ,isCreating,searchQuery,
               className="add-input"
               value={newProfileName}
               onChange={(e) => setNewProfileName(e.target.value)}
+              autoFocus={addProfileTrigger}
             />
             <button 
             type='button'
