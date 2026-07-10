@@ -15,3 +15,19 @@ export const TIMEZONES = [
   { label: 'Sydney (AEST/AEDT)', value: 'Australia/Sydney' }
 ];
 
+
+export const TIMEZONE_MAP = {
+  'America/New_York': 'Eastern Time (ET)',
+  'America/Chicago': 'Central Time (CT)',
+  'America/Denver': 'Mountain Time (MT)',
+  'America/Los_Angeles': 'Pacific Time (PT)',
+  'America/Anchorage': 'Alaska Time (AKT)',
+  'Pacific/Honolulu': 'Hawaii Time (HT)',
+  'Europe/London': 'London (GMT/BST)',
+  'Europe/Paris': 'Paris (CET/CEST)',
+  'Europe/Berlin': 'Berlin (CET/CEST)',
+  'Asia/Kolkata': 'India (IST)',
+  'Asia/Shanghai': 'China (CST)',
+  'Asia/Tokyo': 'Tokyo (JST)',
+  'Australia/Sydney': 'Sydney (AEST/AEDT)'
+};

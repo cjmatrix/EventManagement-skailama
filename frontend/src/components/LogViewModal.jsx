@@ -2,7 +2,7 @@ import React from 'react';
 import dayjs from 'dayjs';
 import { Clock, X } from 'lucide-react';
 import '../css/ViewLogs.css';
-
+import { TIMEZONE_MAP } from '../constants/timezones';
 export default function LogViewModal({ event, onClose }) {
 
   const logs = event?.updateLogs || [];
@@ -18,7 +18,7 @@ export default function LogViewModal({ event, onClose }) {
     }
 
      if (newData.timezone) {
-      return `Timezone changed to: ${newData.timezone}`;
+      return `Timezone changed to: ${TIMEZONE_MAP[newData.timezone]}`;
     }
     if (newData.startTime || newData.endTime) {
       return "Start date/time updated";
